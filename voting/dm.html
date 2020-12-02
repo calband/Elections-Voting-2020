@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.serializejson.js"></script>
+<HEAD>
+  <meta charset="UTF-8">
+  <title>Drum Major Voting 2020</title>
+  <link rel="stylesheet" type="text/css" href="dm.css">
+</HEAD>
+<body>
+
+<h1>Cal Band Drum Major Elections 2020</h1>
+
+<p>Please select each ranking only ONCE or else the toll troll will get upsetti (except for "Abstain" votes):</p>
+
+
+<form id="dm" class ="vote-form" action="" method="post">
+  <ul>
+  <li>
+  <label for="ep">Elise Park: </label>
+  <select class="vote-form" id="ep" name="ep" value="Elise Park">
+    <option value="1">First Choice</option>
+    <option value="2">Second Choice</option>
+    <option value="3">Third Choice</option>
+    <option value="4">Fourth Choice</option>
+    <option value="5">Fifth Choice</option>
+    <option value="A" selected>Abstain</option>
+  </select>
+</li>
+  <br>
+  <li>
+  <label for="hc">Hannah Chea: </label>
+  <select class="vote-form" id="hc" name="hc" value="Hannah Chea">
+    <option value="1">First Choice</option>
+    <option value="2">Second Choice</option>
+    <option value="3">Third Choice</option>
+    <option value="4">Fourth Choice</option>
+    <option value="5">Fifth Choice</option>
+    <option value="A" selected>Abstain</option>
+  </select>
+</li>
+  <br>
+  <li>
+  <label for="rd">Raj Dasani: </label>
+  <select class="vote-form" id="rd" name="rd" value="Raj Dasani">
+    <option value="1">First Choice</option>
+    <option value="2">Second Choice</option>
+    <option value="3">Third Choice</option>
+    <option value="4">Fourth Choice</option>
+    <option value="5">Fifth Choice</option>
+    <option value="A" selected>Abstain</option>
+  </select>
+  </li>
+  <br>
+  <li>
+  <label for="rs">Raymond Sun: </label>
+  <select class="vote-form" id="rs" name="rs" value="Raymond Sun">
+    <option value="1">First Choice</option>
+    <option value="2">Second Choice</option>
+    <option value="3">Third Choice</option>
+    <option value="4">Fourth Choice</option>
+    <option value="5">Fifth Choice</option>
+    <option value="A" selected>Abstain</option>
+  </select>
+  </li>
+  <br>
+  <li>
+  <label for="yc">Yueyi Che: </label>
+  <select class="vote-form" id="yc" name="yc" value="Yueyi Che">
+    <option value="1">First Choice</option>
+    <option value="2">Second Choice</option>
+    <option value="3">Third Choice</option>
+    <option value="4">Fourth Choice</option>
+    <option value="5">Fifth Choice</option>
+    <option value="A" selected>Abstain</option>
+  </select>
+  </li>
+ 
+  <br>
+  <input type="submit" onclick="clicked(event)" id="submit"/>
+  </ul>
+
+  <script>
+  function clicked(e)
+  {
+      if(!confirm('Are you sure?')) {
+          e.preventDefault();
+      }
+  }
+</script>
+
+
+</form>
+ 
+
+
+
+<img src="https://i0.wp.com/calband.berkeley.edu/wp-content/uploads/2019/04/calband-highstepper-gold.png" id="left">
+<img src="https://i0.wp.com/calband.berkeley.edu/wp-content/uploads/2019/04/calband-highstepper-gold.png" id="right">
+
+</body>
+</html>
+
+
