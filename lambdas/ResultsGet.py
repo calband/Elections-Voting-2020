@@ -53,6 +53,7 @@ class RankedElection:
     tied_race = "TIED RACE"
 
     def __init__(self, raw_ballots):
+        self.rounds = 0
         self.margin = None
         self.winner = None
         self.time = None
@@ -85,6 +86,8 @@ class RankedElection:
 
         potential_winner = max(tally.keys(), key=lambda x: tally[x])
         winning_margin = tally[potential_winner] / self.total
+
+        self.rounds += 1
 
         if winning_margin <= self.required_margin:
             eliminated_candidate = min(tally.keys(), key=lambda x: tally[x])
@@ -138,7 +141,8 @@ def main(event, context):
         "position": valid_vote_types[query["voteType"]],
         "margin": election.margin,
         "total": election.total,
-        "tabulationTime": election.time
+        "tabulationTime": election.time,
+        "numRounds": election.rounds
     }
 
     return create_response(200, "Tabulation completed!", payload)
