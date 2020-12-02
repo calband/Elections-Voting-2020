@@ -1,5 +1,10 @@
 h1 {
-	padding: 45px 0;
+	text-align: center;
+	color: #FDB515;
+	font-size: 40px;
+}
+
+#bottom_header {
 	text-align: center;
 	color: #FDB515;
 	font-size: 40px;
@@ -71,18 +76,21 @@ text-shadow:none;
 
 #left {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 1%;
+  left: 5%;
   width: 300px;
   
 }
 
 #right {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 1%;
+  right: 5%;
   width: 300px;
   
+}
+.footer {
+	color: #FDB515;
 }
 
 form {
