@@ -31,13 +31,14 @@ def lambda_handler(event, context):
         print("-----ERROR. TRACEBACK:-----")
         traceback.print_exc()
         print("-------END TRACEBACK-------")
+        # return create_response(500, traceback.format_exc())
         return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The code monkeys at comp comm are working VEWY HAWD to fix this! Owo")
 
 
 def main(event, context):
-    body = json.loads(event)["body"]
+    body = json.loads(event["body"])
 
-    # Verify that request if valid
+    # Verify that request is valid
     if not verify_request(body):
         return create_response(400, "Missing parameters required to vote or parameters provided are malformed - vote discarded.")
 
@@ -50,7 +51,7 @@ def main(event, context):
     registered_voter = registered_voter["Item"]
 
     # Check if password hashes match
-    if registered_voter["pwHash"] != body["pwHash"]:
+    if registered_voter["pwHash"] != create_hash(body["pwHash"]):
         return create_response(400, "Password hashes do not match - vote discarded.")
 
     # Check if valid vote
