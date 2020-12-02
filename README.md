@@ -1,5 +1,12 @@
 # Elections Voting 2020
-_____ Frontend Stack with a full serverless AWS backend stack.
+_____ Frontend Stack with a full serverless AWS backend stack. This voting system was built during the Fall 2020 ExComm 
+elections. Because voting in person is a major health hazard due to the pandemic occurring at the time, an online voting
+system was necessary in order to facilitate a free and fair democratic election in an online setting. This repo 
+represents an attempt to facilitate that election. If you see any bugs, feel free to create a new GitHub issue!
+
+The future goal of this repo is to be merged into Members Only in case PR Comm wants to transition from a pure paper
+ballot system to a pure electronic system after the pandemic. Usage of this repo past the Fall 2020 ExComm elections
+is up to the discretion of future ExComm.
 
 
 ## Backend Stack
@@ -26,7 +33,7 @@ the probability of collisions is extremely small. _Going backwards from vote `id
 due to the intractability of going from hash to input and because _finding the exact millisecond of UTC datetime is 
 impossible to retrieve_.
 
-tl;dr: _It is practically impossible to tied a voter to a vote._
+tl;dr: _It is practically impossible to connect a vote to a voter._
 
 ## Voting
 Send a `POST` request to `https://soqgbubrta.execute-api.us-west-1.amazonaws.com/prod/vote/` with the a body payload 
