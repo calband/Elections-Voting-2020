@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import boto3
 import traceback
@@ -42,15 +42,20 @@ class Ballot:
 
     def eliminate(self, candidate):
         if candidate != self.default_vote:
-            self.candidates.remove(candidate)
+            try:
+                self.candidates.remove(candidate)
+            except ValueError:
+                pass
 
 
 class RankedElection:
     required_margin = 0.5
+    tied_race = "TIED RACE"
 
     def __init__(self, raw_ballots):
         self.margin = None
         self.winner = None
+        self.time = None
 
         self.ballots = []
         for raw_ballot in raw_ballots:
@@ -59,6 +64,17 @@ class RankedElection:
         self.total = len(raw_ballots)
 
     def tabulate(self):
+        try:
+            self.__tabulate__()
+        except RecursionError:
+            self.margin = int(self.total / 2)
+            self.winner = self.tied_race
+            self.time = str(datetime.utcnow() - timedelta(hours=8))
+
+    def __tabulate__(self):
+        if not self.total:
+            return None
+
         tally = {}
         for ballot in self.ballots:
             candidate = ballot.first_choice()
@@ -77,6 +93,7 @@ class RankedElection:
         else:
             self.margin = tally[potential_winner]
             self.winner = potential_winner
+            self.time = str(datetime.utcnow() - timedelta(hours=8))
             return potential_winner
 
     def eliminate(self, candidate):
@@ -119,7 +136,8 @@ def main(event, context):
         "winner": election.winner,
         "position": valid_vote_types[query["voteType"]],
         "margin": election.margin,
-        "total": election.total
+        "total": election.total,
+        "tabulationTime": election.time
     }
 
     return create_response(200, "Tabulation completed!", payload)
