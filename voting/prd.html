@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<HEAD>
+  <meta charset="UTF-8">
+  <title>Public Relations Director Voting 2020</title>
+  <link rel="stylesheet" type="text/css" href="prd.css">
+</HEAD>
+<body>
+
+<h1>Cal Band Public Relations Director Elections 2020</h1>
+
+<p>Please select each ranking only ONCE or else the toll troll will get upsetti (except for "Abstain" votes):</p>
+
+<ul>
+<form action="/action_page.php" method="post">
+  <li>
+  <label for="sw">Sabrina Wang: </label>
+  <select id="sw" name="sw">
+    <option value="1">First Choice</option>
+    <option value="A" selected>Abstain</option>
+  </select>
+</li>
+  <br>
+  
+  <br>
+  <input type="submit" onclick="clicked(event)" id="submit"/>
+  </ul>
+
+  <script>
+  function clicked(e)
+  {
+      if(!confirm('Are you sure?')) {
+          e.preventDefault();
+      }
+  }
+</script>
+</form>
+
+<img src="https://i0.wp.com/calband.berkeley.edu/wp-content/uploads/2019/04/calband-highstepper-gold.png" id="left">
+<img src="https://i0.wp.com/calband.berkeley.edu/wp-content/uploads/2019/04/calband-highstepper-gold.png" id="right">
+
+</body>
+</html>
