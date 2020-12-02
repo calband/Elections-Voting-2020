@@ -38,8 +38,8 @@ specified below to register a vote!
     "pwHash": "canjkasejcjkanjeafn",
     "voteType": "dm"|"execSec"|"prd"|"stud",
     "vote": {
-        "Oski Bear": '1',
-        "Josie Bruin": '2',
+        "Oski Bear": "1",
+        "Josie Bruin": "2",
         "stanfurd tree": "A",
         ...
     }
