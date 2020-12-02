@@ -31,7 +31,7 @@ class Ballot:
             if val != self.abstain_vote:
                 if int(val) > highest_index:
                     highest_index = int(val)
-                self.candidates[val] = candidate
+                self.candidates[int(val) - 1] = candidate
         self.candidates = self.candidates[:highest_index]
 
     def first_choice(self):
@@ -95,7 +95,7 @@ def lambda_handler(event, context):
 
 
 def main(event, context):
-    query = json.loads(event["queryStringParameters"])
+    query = json.loads(event)["queryStringParameters"]
 
     # Verify that request if valid
     if not verify_request(query):
@@ -118,7 +118,8 @@ def main(event, context):
     payload = {
         "winner": election.winner,
         "position": valid_vote_types[query["voteType"]],
-        "margin": election.margin
+        "margin": election.margin,
+        "total": election.total
     }
 
     return create_response(200, "Tabulation completed!", payload)
