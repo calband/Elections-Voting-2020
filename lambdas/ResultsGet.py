@@ -108,13 +108,14 @@ def lambda_handler(event, context):
         print("-----ERROR. TRACEBACK:-----")
         traceback.print_exc()
         print("-------END TRACEBACK-------")
+        # return create_response(500, traceback.format_exc())
         return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The code monkeys at comp comm are working VEWY HAWD to fix this! Owo")
 
 
 def main(event, context):
-    query = json.loads(event)["queryStringParameters"]
+    query = event["queryStringParameters"]
 
-    # Verify that request if valid
+    # Verify that request is valid
     if not verify_request(query):
         return create_response(400, "Missing parameters required to vote or parameters provided are invalid - tabulation cancelled.")
 
