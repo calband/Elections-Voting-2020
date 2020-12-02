@@ -35,32 +35,32 @@ def lambda_handler(event, context):
 
 
 def main(event, context):
-    body = json.loads(event["body"])
+    body = json.loads(event)["body"]
 
-    vote_type = body["voteType"]
+    # Verify that request if valid
     if not verify_request(body):
         return create_response(400, "Missing parameters required to vote or parameters provided are malformed - vote discarded.")
 
-    registered_voter = voters.get_item(
-        Key={"id": body["voterId"]}
-    )
-
     # Check if user is in database
+    registered_voter = voters.get_item(
+        Key={"email": body["voterId"]}
+    )
     if "Item" not in registered_voter:
         return create_response(400, "Voter ID is not registered - vote discarded.")
     registered_voter = registered_voter["Item"]
 
     # Check if password hashes match
-    if registered_voter["pw_hash"] != body["pwHash"]:
+    if registered_voter["pwHash"] != body["pwHash"]:
         return create_response(400, "Password hashes do not match - vote discarded.")
 
     # Check if valid vote
-    if not verify_vote(body[vote_type]):
+    vote_type = body["voteType"]
+    if not verify_vote(body["vote"]):
         return create_response(400, f"Vote for {valid_vote_types[vote_type]} is malformed - vote discarded.")
 
     # Check if user has already voted, and if not, register vote
     if not register_vote(registered_voter, body["vote"], body["voteType"]):
-        create_response(500, "Voter has already voted for this position - vote discarded.")
+        return create_response(400, f"Voter has already voted for {valid_vote_types[vote_type]} - vote discarded.")
 
     return create_response(200, "Voted successfully! Thank you for making democracy a SUCCESS")
 
@@ -86,12 +86,14 @@ def verify_vote(vote_json):
         if not isinstance(key, str):
             return False
         val = vote_json[key]
-        if not isinstance(val, str):
+        if isinstance(val, str):
             try:
                 reverse_vote.append(int(val))
             except ValueError:
-                if val != "A" and val != "a" and val.lower() != "abstain":
+                if val != "A":
                     return False
+        else:
+            return False
 
     return sorted(reverse_vote) == list(range(1, len(reverse_vote) + 1))  # Check if there is a pure ranked vote
 
@@ -101,7 +103,7 @@ def register_vote(registered_voter, vote_json, vote_type):
         return False
 
     voters.update_item(
-        Key={"id": registered_voter["id"]},
+        Key={"email": registered_voter["email"]},
         UpdateExpression=f"SET {vote_type} = :{vote_type}",
         ExpressionAttributeValues={f":{vote_type}": True}
     )
@@ -109,10 +111,9 @@ def register_vote(registered_voter, vote_json, vote_type):
     votes.put_item(
         Item={
             # Double hashing ID and adding datetime to obfuscate away the vote from the voter
-            "id": create_hash(create_hash(registered_voter["id"], vote_type, datetime.utcnow())),
+            "id": create_hash(create_hash(registered_voter["email"], vote_type, datetime.utcnow())),
             "voteType": vote_type,
-            "timestamp": str(datetime.utcnow()),
-            "vote_raw": json.dumps(vote_json)
+            "voteRaw": json.dumps(vote_json)
         }
     )
 

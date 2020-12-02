@@ -1,2 +1,5 @@
 # Removing PyCharm Garbage
 .idea
+
+# Removing Jupyter Notebooks used for testing small portions of code
+notebooks
