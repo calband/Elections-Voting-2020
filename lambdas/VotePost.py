@@ -59,7 +59,7 @@ def main(event, context):
     if not verify_vote(body["vote"]):
         return create_response(400, f"Vote for {valid_vote_types[vote_type]} is malformed - vote discarded.")
 
-    # Check if user has already voted, and if not, register vote
+    # Check if user has already voted and changed the password, and if not, register vote
     if not register_vote(registered_voter, body["vote"], body["voteType"]):
         return create_response(400, f"Voter has already voted for {valid_vote_types[vote_type]} - vote discarded.")
 
