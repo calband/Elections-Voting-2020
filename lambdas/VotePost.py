@@ -24,6 +24,15 @@ valid_vote_types = {
     "test": "Test Vote"
 }
 
+# CHANGE THIS AS YOU GO ALONG
+# This makes sure that there is a valid voting window but change is NOT AUTOMATIC (for now, future hack pls change)
+disabled_votes = {
+    "prd",
+    "stud",
+    "dm",
+    "execSec"
+}
+
 
 def lambda_handler(event, context):
     try:
@@ -63,6 +72,10 @@ def main(event, context):
     vote_type = body["voteType"]
     if not verify_vote(body["vote"]):
         return create_response(400, f"Vote for {valid_vote_types[vote_type]} is malformed - vote discarded.")
+
+    # Check if election window is open
+    if vote_type in disabled_votes:
+        return create_response(400, f"The voting period for {valid_vote_types[vote_type]} is closed - vote discarded.")
 
     # Check if user has already voted and changed the password, and if not, register vote
     if not register_vote(registered_voter, body["vote"], body["voteType"]):
