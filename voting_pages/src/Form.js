@@ -1,105 +1,125 @@
-import React from 'react';
-// import './App.css';
+import React, {Component} from 'react';
+import axios from 'axios';
 
-class MyForm extends React.Component {
-  constructor() {
-    super();
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  async handleSubmit(event) {
+class Form extends Component {
+  state = {
+    voterId: '',
+      pwHash: '',
+      c1: 'A',
+      c2: 'A',
+      c3: 'A',
+      c4: 'A',
+      c5: 'A'
+  };
+
+/* This is where the magic happens
+*/
+handleSubmit = event => {
     event.preventDefault();
-    const data = JSON.stringify({
-        "voterId": document.getElementById("vid").value,
-        "pwHash": document.getElementById("pwh").value,
-        "voteType": "test",
-        "vote": {
-            "Elise Park": document.getElementById('ep').value,
-            "Hannah Chea": document.getElementById('hc').value,
-            "Raj Dasani": document.getElementById('rd').value,
-            "Raymond Sun": document.getElementById('rs').value,
-            "Yueyi Che": document.getElementById('yc').value,
+    const user = {
+      voterId: this.state.voterId,
+        pwHash: this.state.pwHash,
+        voteType: 'test',
+        vote: {
+            "Person 1": this.state.c1,
+            "Person 2": this.state.c2,
+            "Person 3": this.state.c3,
+            "Person 4": this.state.c4,
+            "Person 5": this.state.c5
         }
-    });
+    };
 
-    console.log(data);
-
-    let test = fetch('https://soqgbubrta.execute-api.us-west-1.amazonaws.com/prod/vote', {
-      method: 'POST',
-      body: data,
+    const config = {
         headers: {
-            'x-api-key': 'CB1pjRpF7S9xAL2Xuchch4LVEGMYDaJo7mMtnNbD', //it can be iPhone or your any other attribute
-            'Content-Type': 'application/json'
+            "x-api-key": "CB1pjRpF7S9xAL2Xuchch4LVEGMYDaJo7mMtnNbD"
         }
-    });
-    console.log((await Promise.resolve(test)).json());
-  }
+    };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
+    console.log({ user });
+    console.log(config);
+
+    axios.post('https://soqgbubrta.execute-api.us-west-1.amazonaws.com/prod/vote', { user }, config)
+      .then(res=>{
+        console.log(res);
+        console.log(res.data);
+        window.location = "/retrieve" //This line of code will redirect you once the submission is succeed
+      })
+  };
+handleChange = event =>{
+    console.log("handling the change!!");
+    console.log(event);
+    this.setState({ name: event.target.value});
+  };
+render() {
+    return (<form onSubmit={this.handleSubmit}>
       <li>
-          <label htmlFor="ep">Elise Park: </label>
-          <select id="ep" name="ep">
+          <label htmlFor="c1">Elise Park: </label>
+          <select id="c1" name="c1">
               <option value="1">First Choice</option>
               <option value="2">Second Choice</option>
               <option value="3">Third Choice</option>
               <option value="4">Fourth Choice</option>
               <option value="5">Fifth Choice</option>
               <option value="A" selected>Abstain</option>
+              onChange= {this.handleChange}
           </select>
       </li>
           <li>
-              <label htmlFor="hc">Hannah Chea: </label>
-              <select id="hc" name="hc">
+              <label htmlFor="c2">Hannah Chea: </label>
+              <select id="c2" name="c2">
                   <option value="1">First Choice</option>
                   <option value="2">Second Choice</option>
                   <option value="3">Third Choice</option>
                   <option value="4">Fourth Choice</option>
                   <option value="5">Fifth Choice</option>
                   <option value="A" selected>Abstain</option>
+                  onChange= {this.handleChange}
               </select>
           </li>
               <li>
-                  <label htmlFor="rd">Raj Dasani: </label>
-                  <select id="rd" name="rd">
+                  <label htmlFor="c3">Raj Dasani: </label>
+                  <select id="c3" name="c3">
                       <option value="1">First Choice</option>
                       <option value="2">Second Choice</option>
                       <option value="3">Third Choice</option>
                       <option value="4">Fourth Choice</option>
                       <option value="5">Fifth Choice</option>
                       <option value="A" selected>Abstain</option>
+                      onChange= {this.handleChange}
                   </select>
               </li>
                   <li>
-                      <label htmlFor="rs">Raymond Sun: </label>
-                      <select id="rs" name="rs">
+                      <label htmlFor="c4">Raymond Sun: </label>
+                      <select id="c4" name="c4">
                           <option value="1">First Choice</option>
                           <option value="2">Second Choice</option>
                           <option value="3">Third Choice</option>
                           <option value="4">Fourth Choice</option>
                           <option value="5">Fifth Choice</option>
                           <option value="A" selected>Abstain</option>
+                          onChange= {this.handleChange}
                       </select>
                   </li>
                       <li>
-                          <label htmlFor="yc">Yueyi Che: </label>
-                          <select id="yc" name="yc">
+                          <label htmlFor="c5">Yueyi Che: </label>
+                          <select id="c5" name="c5">
                               <option value="1">First Choice</option>
                               <option value="2">Second Choice</option>
                               <option value="3">Third Choice</option>
                               <option value="4">Fourth Choice</option>
                               <option value="5">Fifth Choice</option>
                               <option value="A" selected>Abstain</option>
+                              onChange= {this.handleChange}
                           </select>
                       </li>
                       <li>
                   <label htmlFor="vid">Enter Voter ID</label>
-                    <input id="vid" name="vid" type="email" />
+                    <input id="vid" name="vid" type="email" onChange= {this.handleChange}/>
                                       </li>
                       <li>
                 <label htmlFor="pwh">Enter Password</label>
-                    <input id="pwh" name="pwh" type="password" />
+                    <input id="pwh" name="pwh" type="password" onChange= {this.handleChange}/>
                                       </li>
 <li>
               <button>Vote!</button></li>
@@ -111,10 +131,10 @@ class MyForm extends React.Component {
 function App() {
   return (
       <body>
-      <title>Test Voting 2020</title>
-      <h1>Test Election 2020</h1>
+        <title>Drum Major Voting 2020</title>
+      <h1>Cal Band Drum Major Elections 2020</h1>
       <p>Please select each ranking only ONCE or else the toll troll will get upsetti (except for "Abstain" votes):</p>
-      <MyForm></MyForm>
+      <Form/>
       </body>
     );
 }
