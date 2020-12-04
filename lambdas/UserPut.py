@@ -36,12 +36,16 @@ def main(event, context):
     registered_voter = voters.get_item(
         Key={"email": body["voterId"]}
     )
-    if "Item" in registered_voter:
-        return create_response(400, "Voter ID is already registered - user registration discarded.")
+    if "Item" not in registered_voter:
+        return create_response(400, "Voter ID is not registered - password change request ignored.")
     registered_voter = registered_voter["Item"]
 
+    # Check if old passwords match
+    if registered_voter["pwHash"] != create_hash(body["oldPwHash"]):
+        return create_response(400, "Old password does not match current database - password change request ignored.")
+
     # Update password!
-    update_password(body["voterId"], body["pwHash"])
+    update_password(body["voterId"], body["newPwHash"])
 
     return create_response(200, "Successfully changed password! Thank you for making democracy a SUCCESS")
 

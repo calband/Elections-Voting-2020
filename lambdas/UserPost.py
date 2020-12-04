@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import boto3
 import traceback
@@ -9,7 +10,6 @@ voters = ddb.Table("CalbandUsers")
 
 required_params = [
     "voterId",
-    "pwHash",
     "secretKey"
 ]
 
@@ -45,9 +45,16 @@ def main(event, context):
         return create_response(400, "Voter ID is already registered - user registration discarded.")
 
     # Create user!
-    create_user(body["voterId"], body["pwHash"])
+    temp_pw = create_user(body["voterId"])
+    if not temp_pw:
+        return create_response(500, "Something went wrong in creating the new user :(")
 
-    return create_response(200, "Registered successfully! Thank you for making democracy a SUCCESS")
+    payload = {
+        "username": body["voterId"],
+        "password": temp_pw
+    }
+
+    return create_response(200, "Registered successfully! Please change your password IMMEDIATELY", payload)
 
 
 def verify_request(body):
@@ -58,17 +65,22 @@ def verify_request(body):
     return True
 
 
-def create_user(username, pw_hash):
+def create_user(username):
+    temp_pw = create_hash(datetime.utcnow())[:10]
     voters.put_item(
         Item={
             "email": username,
-            "pwHash": create_hash(pw_hash),
+            "pwHash": create_hash(temp_pw),
+            "pwChanged": False,
             "dm": False,
             "execSec": False,
             "prd": False,
-            "stud": False
+            "stud": False,
+            "test": False
         }
     )
+
+    return temp_pw
 
 
 def create_hash(*args):

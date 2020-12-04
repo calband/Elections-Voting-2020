@@ -15,7 +15,8 @@ valid_vote_types = {
     "prd": "Public Relations Director",
     "stud": "Student Director",
     "dm": "Drum Major",
-    "execSec": "Executive Secretary"
+    "execSec": "Executive Secretary",
+    "test": "Test Vote"
 }
 
 

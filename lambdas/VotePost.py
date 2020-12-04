@@ -20,7 +20,8 @@ valid_vote_types = {
     "prd": "Public Relations Director",
     "stud": "Student Director",
     "dm": "Drum Major",
-    "execSec": "Executive Secretary"
+    "execSec": "Executive Secretary",
+    "test": "Test Vote"
 }
 
 
@@ -49,6 +50,10 @@ def main(event, context):
     if "Item" not in registered_voter:
         return create_response(400, "Voter ID is not registered - vote discarded.")
     registered_voter = registered_voter["Item"]
+
+    # Check if the voter has changed their password
+    if not registered_voter["pwChanged"]:
+        return create_response(400, "Voter has not yet changed their password - vote discarded.")
 
     # Check if password hashes match
     if registered_voter["pwHash"] != create_hash(body["pwHash"]):
