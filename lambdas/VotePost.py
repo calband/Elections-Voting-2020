@@ -26,6 +26,8 @@ valid_vote_types = {
 
 # CHANGE THIS AS YOU GO ALONG
 # This makes sure that there is a valid voting window but change is NOT AUTOMATIC (for now, future hack pls change)
+# To enable a voting window, simply remove the position from this set
+# REMEMBER TO DISABLE THE VOTING WINDOW LATER
 disabled_votes = {
     "prd",
     "stud",
@@ -77,7 +79,7 @@ def main(event, context):
     if vote_type in disabled_votes:
         return create_response(400, f"The voting period for {valid_vote_types[vote_type]} is closed - vote discarded.")
 
-    # Check if user has already voted and changed the password, and if not, register vote
+    # Check if user has already voted, and if not, register vote
     if not register_vote(registered_voter, body["vote"], body["voteType"]):
         return create_response(400, f"Voter has already voted for {valid_vote_types[vote_type]} - vote discarded.")
 

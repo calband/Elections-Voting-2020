@@ -63,7 +63,7 @@ def update_password(username, pw_hash):
         Key={"email": username},
         UpdateExpression="SET pwHash = :pwHash, pwChanged = :pwChanged",
         ExpressionAttributeValues={
-            ":pwHash": pw_hash,
+            ":pwHash": create_hash(pw_hash),
             ":pwChanged": True
         }
     )
