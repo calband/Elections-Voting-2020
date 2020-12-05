@@ -1,8 +1,13 @@
 # Removing email list from members only
 voters.csv
 
+# Remoiving build files
+voting_pages.zip
+build
+
 # Removing PyCharm Garbage
 .idea
+.eslintcache
 
 # Removing Jupyter Notebooks used for testing small portions of code
 notebooks

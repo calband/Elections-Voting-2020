@@ -40,12 +40,10 @@ class ExecSecBallot extends React.Component {
                 console.log(respJson.message);
                 this.setState({
                     error: respJson.message,
-                    submitted: null
                 })
             }).catch(() => {
                 this.setState({
                     error: "this isn't supposed to happen LMFAO contact ervin ASAP",
-                    submitted: null
                 });
             });
         } else {
