@@ -71,7 +71,7 @@ class ChangePw extends React.Component {
                     <label htmlFor="pwn">Enter Password</label>
                     <input id="pwn" name="pwn" type="password"/>
                 </li>
-                <button>Vote!</button>
+                <button>Change Password</button>
                 {this.state.error != null && <p>{this.state.error}</p>}
                 {this.state.submitted != null && <p>{this.state.submitted}</p>}
             </form>
