@@ -3,6 +3,8 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import {Success, Failure} from "./alerts";
+
 class ChangePw extends React.Component {
 	constructor(props) {
 		super(props);
@@ -93,8 +95,8 @@ class ChangePw extends React.Component {
 				<Button className="vote-btn" type="submit">
 					Change Password
 				</Button>
-				{this.state.error != null && <p>{this.state.error}</p>}
-				{this.state.submitted != null && <p>{this.state.submitted}</p>}
+				{this.state.error != null && <Failure title = "Oh no!" message = {this.state.error} />}
+				{this.state.submitted != null && <Success title = "Yay!" message = {this.state.submitted}/>}
 			</Form>
 		);
 	}

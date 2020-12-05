@@ -5,6 +5,8 @@ import Disclaimer from './Disclaimer';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import {Success, Failure} from "./alerts";
+
 import Placeholder from '../img/placeholder.png';
 
 class TestBallot extends React.Component {
@@ -60,11 +62,13 @@ class TestBallot extends React.Component {
 					console.log(respJson.message);
 					this.setState({
 						error: respJson.message,
+						submitted: null,
 					});
 				})
 				.catch(() => {
 					this.setState({
-						error: "this isn't supposed to happen LMFAO contact ervin ASAP",
+						error: "this isn't supposed to happen LMFAO contact ervin asap",
+						submitted: null,
 					});
 				});
 		} else {
@@ -189,8 +193,8 @@ class TestBallot extends React.Component {
 				<Button className="vote-btn" type="submit">
 					Vote!
 				</Button>
-				{this.state.error != null && <p>{this.state.error}</p>}
-				{this.state.submitted != null && <p>{this.state.submitted}</p>}
+				{this.state.error != null && <Failure title = "Oh no!" message = {this.state.error} />}
+				{this.state.submitted != null && <Success title = "Yay!" message = {this.state.submitted}/>}
 			</Form>
 		);
 	}
