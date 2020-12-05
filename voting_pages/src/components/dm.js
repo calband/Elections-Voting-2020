@@ -5,7 +5,11 @@ import Disclaimer from './Disclaimer';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import Placeholder from '../img/placeholder.png';
+import CandidatePhoto1 from '../img/dm/elise_park.jpeg';
+import CandidatePhoto2 from '../img/dm/hannah_chea.jpeg';
+import CandidatePhoto3 from '../img/dm/raj_dasani.jpeg';
+import CandidatePhoto4 from '../img/dm/raymond_sun.jpeg';
+import CandidatePhoto5 from '../img/dm/yueyi_che.jpeg';
 
 class DmBallot extends React.Component {
 	electionType = 'Drum Major';
@@ -85,7 +89,7 @@ class DmBallot extends React.Component {
 				<Form.Group controlId="c1">
 					<Form.Label htmlFor="c1">{this.candidate1}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto1}
 						alt={this.candidate1}
 						className="candidate-img"
 					/>
@@ -104,7 +108,7 @@ class DmBallot extends React.Component {
 				<Form.Group controlId="c2">
 					<Form.Label htmlFor="c2">{this.candidate2}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto2}
 						alt={this.candidate2}
 						className="candidate-img"
 					/>
@@ -123,7 +127,7 @@ class DmBallot extends React.Component {
 				<Form.Group controlId="c3">
 					<Form.Label htmlFor="c3">{this.candidate3}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto3}
 						alt={this.candidate3}
 						className="candidate-img"
 					/>
@@ -142,7 +146,7 @@ class DmBallot extends React.Component {
 				<Form.Group controlId="c4">
 					<Form.Label htmlFor="c4">{this.candidate4}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto4}
 						alt={this.candidate4}
 						className="candidate-img"
 					/>
@@ -161,7 +165,7 @@ class DmBallot extends React.Component {
 				<Form.Group controlId="c5">
 					<Form.Label htmlFor="c5">{this.candidate5}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto5}
 						alt={this.candidate5}
 						className="candidate-img"
 					/>

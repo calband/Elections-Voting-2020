@@ -5,7 +5,7 @@ import Disclaimer from './Disclaimer';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import Placeholder from '../img/placeholder.png';
+import CandidatePhoto1 from '../img/prd/sabrina_wang.jpeg';
 
 class PrdBallot extends React.Component {
 	electionType = 'Public Relations Director';
@@ -77,7 +77,7 @@ class PrdBallot extends React.Component {
 				<Form.Group controlId="c1">
 					<Form.Label htmlFor="c1">{this.candidate1}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto1}
 						alt={this.candidate1}
 						className="candidate-img"
 					/>

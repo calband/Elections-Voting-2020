@@ -5,7 +5,8 @@ import Disclaimer from './Disclaimer';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import Placeholder from '../img/placeholder.png';
+import CandidatePhoto1 from '../img/stud/corey_kato.jpeg';
+import CandidatePhoto2 from '../img/stud/emma_jensen.jpeg';
 
 class StudBallot extends React.Component {
 	electionType = 'Student Director';
@@ -78,7 +79,7 @@ class StudBallot extends React.Component {
 				<Form.Group controlId="c1">
 					<Form.Label htmlFor="c1">{this.candidate1}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto1}
 						alt={this.candidate1}
 						className="candidate-img"
 					/>
@@ -94,7 +95,7 @@ class StudBallot extends React.Component {
 				<Form.Group controlId="c2">
 					<Form.Label htmlFor="c2">{this.candidate2}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto2}
 						alt={this.candidate2}
 						className="candidate-img"
 					/>

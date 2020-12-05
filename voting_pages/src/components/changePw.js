@@ -91,7 +91,7 @@ class ChangePw extends React.Component {
 				</Form.Group>
 
 				<Button className="vote-btn" type="submit">
-					Vote!
+					Change Password
 				</Button>
 				{this.state.error != null && <p>{this.state.error}</p>}
 				{this.state.submitted != null && <p>{this.state.submitted}</p>}
