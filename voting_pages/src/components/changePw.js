@@ -63,8 +63,8 @@ class ChangePw extends React.Component {
 		return (
 			<Form onSubmit={this.handleSubmit}>
 				<title>Change Password</title>
-				<h1>Executive Committee Elections</h1>
-				<h2>Change Password Page</h2>
+				<h1>Change Password</h1>
+				<h2>Executive Committee Elections 2020</h2>
 				<p>Hello! Thank you for making democracy a success!</p>
 				<p>
 					You are required to change your password to something new before you

@@ -10,12 +10,14 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import TestBallot from './components/test';
+import Main from './components/main';
+import ChangePw from './components/changePw';
 import PrdBallot from './components/prd';
 import StudBallot from './components/stud';
-import ExecSecBallot from './components/execSec';
 import DmBallot from './components/dm';
-import ChangePw from './components/changePw';
+import ExecSecBallot from './components/execSec';
+import TestBallot from './components/test';
+import Footer from './components/footer';
 
 import './App.scss';
 
@@ -42,22 +44,22 @@ function App() {
 									</NavLink>
 								</li>
 								<li>
-									<NavLink to="/dm" activeClassName="selected">
+									<NavLink exact to="/dm" activeClassName="selected">
 										Drum Major Ballot
 									</NavLink>
 								</li>
 								<li>
-									<NavLink to="/stud" activeClassName="selected">
+									<NavLink exact to="/stud" activeClassName="selected">
 										Student Director Ballot
 									</NavLink>
 								</li>
 								<li>
-									<NavLink to="/execSec" activeClassName="selected">
+									<NavLink exact to="/execSec" activeClassName="selected">
 										Executive Secretary Ballot
 									</NavLink>
 								</li>
 								<li>
-									<NavLink to="/test" activeClassName="selected">
+									<NavLink exact to="/test" activeClassName="selected">
 										Test Ballot
 									</NavLink>
 								</li>
@@ -66,16 +68,18 @@ function App() {
 					</Col>
 					<Col xs={8} className="right-col">
 						<Switch>
-							<Route path="/change_password" component={ChangePw} />
-							<Route path="/prd" component={PrdBallot} />
-							<Route path="/dm" component={DmBallot} />
-							<Route path="/stud" component={StudBallot} />
-							<Route path="/execSec" component={ExecSecBallot} />
-							<Route path="/test" component={TestBallot} />
+							<Route exact path="/" component={Main} />
+							<Route exact path="/change_password" component={ChangePw} />
+							<Route exact path="/prd" component={PrdBallot} />
+							<Route exact path="/dm" component={DmBallot} />
+							<Route exact path="/stud" component={StudBallot} />
+							<Route exact path="/execSec" component={ExecSecBallot} />
+							<Route exact path="/test" component={TestBallot} />
 						</Switch>
 					</Col>
 				</Row>
 			</Router>
+			<Footer/>
 		</Container>
 	);
 }
