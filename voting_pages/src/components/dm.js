@@ -7,11 +7,11 @@ import Button from 'react-bootstrap/Button';
 
 import {Success, Failure} from "./alerts";
 
-import CandidatePhoto1 from '../img/dm/elise_park.jpeg';
-import CandidatePhoto2 from '../img/dm/hannah_chea.jpeg';
-import CandidatePhoto3 from '../img/dm/raj_dasani.jpeg';
-import CandidatePhoto4 from '../img/dm/raymond_sun.jpeg';
-import CandidatePhoto5 from '../img/dm/yueyi_che.jpeg';
+import CandidatePhoto1 from '../img/elise_park.jpeg';
+import CandidatePhoto2 from '../img/hannah_chea.jpeg';
+import CandidatePhoto3 from '../img/raj_dasani.jpeg';
+import CandidatePhoto4 from '../img/raymond_sun.jpeg';
+import CandidatePhoto5 from '../img/yueyi_che.jpeg';
 
 class DmBallot extends React.Component {
 	electionType = 'Drum Major';

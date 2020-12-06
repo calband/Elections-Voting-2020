@@ -1,5 +1,5 @@
 import React from 'react';
-import Democracy from '../audio/democracy.mp3';
+import Democracy from '../img/democracy.mp3';
 
 class Footer extends React.Component {
     constructor(props) {

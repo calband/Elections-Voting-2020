@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 import {Success, Failure} from "./alerts";
 
-import CandidatePhoto1 from '../img/prd/sabrina_wang.jpeg';
+import CandidatePhoto1 from '../img/sabrina_wang.jpeg';
 
 class PrdBallot extends React.Component {
 	electionType = 'Public Relations Director';
