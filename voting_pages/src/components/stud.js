@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/Button';
 
 import {Success, Failure} from "./alerts";
 
-import CandidatePhoto1 from '../img/corey_kato.jpeg';
-import CandidatePhoto2 from '../img/emma_jensen.jpeg';
+import CandidatePhoto1 from '../img/corey_kato.png';
+import CandidatePhoto2 from '../img/emma_jensen.png';
 
 class StudBallot extends React.Component {
 	electionType = 'Student Director';

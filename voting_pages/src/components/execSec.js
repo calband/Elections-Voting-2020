@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 import {Success, Failure} from "./alerts";
 
-import CandidatePhoto1 from '../img/irene_yoon.jpeg';
+import CandidatePhoto1 from '../img/irene_yoon.png';
 
 class ExecSecBallot extends React.Component {
 	electionType = 'Executive Secretary';
