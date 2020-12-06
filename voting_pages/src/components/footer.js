@@ -1,5 +1,4 @@
 import React from 'react';
-import Democracy from '../img/democracy.wav';
 
 class Footer extends React.Component {
     constructor(props) {
@@ -8,7 +7,8 @@ class Footer extends React.Component {
             play: false,
             pause: true,
         };
-        this.audio = new Audio(Democracy);
+        this.url = "https://cb-democracy.s3-us-west-1.amazonaws.com/democracy.wav";
+        this.audio = new Audio(this.url);
     };
 
     play = async () => {
