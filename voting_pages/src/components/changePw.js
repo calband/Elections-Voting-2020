@@ -83,12 +83,12 @@ class ChangePw extends React.Component {
 				</Form.Group>
 
 				<Form.Group controlId="pwo" className="voter-info">
-					<Form.Label htmlFor="pwo">Enter Password</Form.Label>
+					<Form.Label htmlFor="pwo">Enter Old Password</Form.Label>
 					<Form.Control id="pwo" name="pwo" type="password" />
 				</Form.Group>
 
 				<Form.Group controlId="pwn" className="voter-info">
-					<Form.Label htmlFor="pwn">Enter Password</Form.Label>
+					<Form.Label htmlFor="pwn">Enter New Password</Form.Label>
 					<Form.Control id="pwn" name="pwn" type="password" />
 				</Form.Group>
 
