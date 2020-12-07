@@ -92,10 +92,6 @@ class PrdBallot extends React.Component {
 								/>
 								<Form.Control as="select" id="c1" name="c1">
 									<option value="1">First Choice</option>
-									<option value="2">Second Choice</option>
-									<option value="3">Third Choice</option>
-									<option value="4">Fourth Choice</option>
-									<option value="5">Fifth Choice</option>
 									<option value="A" selected>
 										Abstain
 									</option>
