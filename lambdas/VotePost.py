@@ -21,7 +21,7 @@ valid_vote_types = {
     "stud": "Student Director",
     "dm": "Drum Major",
     "execSec": "Executive Secretary",
-    "test": "Test Vote"
+    "test": "Cutest Couple"
 }
 
 # CHANGE THIS AS YOU GO ALONG
@@ -44,7 +44,7 @@ def lambda_handler(event, context):
         traceback.print_exc()
         print("-------END TRACEBACK-------")
         # return create_response(500, traceback.format_exc())
-        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The code monkeys at comp comm are working VEWY HAWD to fix this! Owo")
+        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The gowden beaws at comp comm are working VEWY HAWD to fix this! Owo")
 
 
 def main(event, context):
@@ -54,36 +54,38 @@ def main(event, context):
     if not verify_request(body):
         return create_response(400, "Missing parameters required to vote or parameters provided are malformed - vote discarded.")
 
+    # Check if election window is open
+    vote_type = body["voteType"]
+    if vote_type in disabled_votes:
+        return create_response(400, f"The voting period for {valid_vote_types[vote_type]} isn't open :(")
+
     # Check if user is in database
     registered_voter = voters.get_item(
         Key={"email": body["voterId"]}
     )
     if "Item" not in registered_voter:
-        return create_response(400, "Voter ID is not registered - vote discarded.")
+        return create_response(400, "Incorrect username or password!")
     registered_voter = registered_voter["Item"]
-
-    # Check if the voter has changed their password
-    if not registered_voter["pwChanged"]:
-        return create_response(400, "Voter has not yet changed their password - vote discarded.")
 
     # Check if password hashes match
     if registered_voter["pwHash"] != create_hash(body["pwHash"]):
-        return create_response(400, "Password hashes do not match - vote discarded.")
+        return create_response(400, "Incorrect username or password!")
+
+    # Check if the voter has changed their password
+    if not registered_voter["pwChanged"]:
+        return create_response(400, "You haven't changed your password yet! You need to change your password first before you can vote.")
+
+    # Check if user has already voted
+    if registered_voter[vote_type]:
+        return create_response(200, f"You already voted for {valid_vote_types[vote_type]}!")
 
     # Check if valid vote
-    vote_type = body["voteType"]
     if not verify_vote(body["vote"]):
-        return create_response(400, f"Vote for {valid_vote_types[vote_type]} is malformed - vote discarded.")
+        return create_response(400, f"Vote for {valid_vote_types[vote_type]} isn't formatted correctly :( Please fix this and try again.")
 
-    # Check if election window is open
-    if vote_type in disabled_votes:
-        return create_response(400, f"The voting period for {valid_vote_types[vote_type]} is closed - vote discarded.")
-
-    # Check if user has already voted, and if not, register vote
-    if not register_vote(registered_voter, body["vote"], body["voteType"]):
-        return create_response(400, f"Voter has already voted for {valid_vote_types[vote_type]} - vote discarded.")
-
-    return create_response(200, "Voted successfully! Thank you for making democracy a SUCCESS")
+    # Register vote!
+    register_vote(registered_voter, body["vote"], body["voteType"])
+    return create_response(200, "You voted successfully! Thank you for making democracy a SUCCESS")
 
 
 def verify_request(body):
@@ -120,9 +122,6 @@ def verify_vote(vote_json):
 
 
 def register_vote(registered_voter, vote_json, vote_type):
-    if registered_voter[vote_type]:
-        return False
-
     voters.update_item(
         Key={"email": registered_voter["email"]},
         UpdateExpression=f"SET {vote_type} = :{vote_type}",
@@ -137,8 +136,6 @@ def register_vote(registered_voter, vote_json, vote_type):
             "voteRaw": json.dumps(vote_json)
         }
     )
-
-    return True
 
 
 def create_hash(*args):

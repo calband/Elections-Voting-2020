@@ -22,7 +22,7 @@ def lambda_handler(event, context):
         traceback.print_exc()
         print("-------END TRACEBACK-------")
         # return create_response(500, traceback.format_exc())
-        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The code monkeys at comp comm are working VEWY HAWD to fix this! Owo")
+        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The gowden beaws at comp comm are working VEWY HAWD to fix this! Owo")
 
 
 def main(event, context):
@@ -37,17 +37,24 @@ def main(event, context):
         Key={"email": body["voterId"]}
     )
     if "Item" not in registered_voter:
-        return create_response(400, "Voter ID is not registered - password change request ignored.")
+        return create_response(400, "Incorrect username or password!")
     registered_voter = registered_voter["Item"]
 
     # Check if old passwords match
     if registered_voter["pwHash"] != create_hash(body["oldPwHash"]):
-        return create_response(400, "Old password does not match current database - password change request ignored.")
+        return create_response(400, "Incorrect username or password!")
+
+    # Check if voter accidentally pressed send early
+    if body["newPwHash"] == "":
+        return create_response(400, "Your new password can't be the empty you silly goose")
+
+    # Check if new password is the same as the old password
+    if registered_voter["pwHash"] == create_hash(body["newPwHash"]):
+        return create_response(400, "Your new password can't be the same as the old password you silly goose")
 
     # Update password!
     update_password(body["voterId"], body["newPwHash"])
-
-    return create_response(200, "Successfully changed password! Thank you for making democracy a SUCCESS")
+    return create_response(200, "Successfully changed password! You are now ready to vote in the ExComm elections :)")
 
 
 def verify_request(body):

@@ -113,7 +113,7 @@ def lambda_handler(event, context):
         traceback.print_exc()
         print("-------END TRACEBACK-------")
         # return create_response(500, traceback.format_exc())
-        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The code monkeys at comp comm are working VEWY HAWD to fix this! Owo")
+        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The gowden beaws at comp comm are working VEWY HAWD to fix this! Owo")
 
 
 def main(event, context):

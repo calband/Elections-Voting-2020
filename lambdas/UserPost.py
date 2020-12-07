@@ -22,7 +22,7 @@ def lambda_handler(event, context):
         traceback.print_exc()
         print("-------END TRACEBACK-------")
         # return create_response(500, traceback.format_exc())
-        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The code monkeys at comp comm are working VEWY HAWD to fix this! Owo")
+        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The gowden beaws at comp comm are working VEWY HAWD to fix this! Owo")
 
 
 def main(event, context):
@@ -34,8 +34,8 @@ def main(event, context):
 
     # lol this is such bad practice never do this pls
     # always obfuscate away your keys to environment variables kids
-    # if create_hash(body["secretKey"]) != '4acf6433cfbd0d1127956815934fb4c77c40':
-    if body['secretKey'] != "lol this is a temp pw don't get used to it":
+    if create_hash(body["secretKey"]) != 'e47829abf456bfdc0aa05f0bdf73ec05cd95':
+        # if body['secretKey'] != "lol this is a temp pw don't get used to it":
         return create_response(400, "Invalid password")
 
     # Check if user is in database

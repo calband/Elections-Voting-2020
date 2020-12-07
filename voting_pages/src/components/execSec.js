@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import {Success, Failure} from "./alerts";
+import Confirm from "./confirm";
 
 import CandidatePhoto1 from '../img/irene_yoon.png';
 
@@ -25,7 +26,6 @@ class ExecSecBallot extends React.Component {
 	}
 
 	handleSubmit = async (event) => {
-		event.preventDefault();
 		const data = JSON.stringify({
 			voterId: document.getElementById('vid').value,
 			pwHash: document.getElementById('pwh').value,
@@ -73,42 +73,55 @@ class ExecSecBallot extends React.Component {
 		}
 	};
 
-	render() {
-		return (
-			<Form onSubmit={this.handleSubmit}>
-				<Disclaimer electionType={this.electionType} />
+    render() {
+        return (
+        	<div>
+				<Confirm title="Are You Sure?" description="After you cast your ballot
+				you will not be able to change your vote! Please make sure
+				that you vote is correct before you submit!">
+					{confirm => (
+						<Form onSubmit={confirm(this.handleSubmit)}>
+							<Disclaimer electionType={this.electionType}/>
 
-				<Form.Group controlId="c1">
-					<Form.Label htmlFor="c1">{this.candidate1}</Form.Label>
-					<img
-						src={CandidatePhoto1}
-						alt={this.candidate1}
-						className="candidate-img"
-					/>
-					<Form.Control as="select" id="c1" name="c1">
-						<option value="1">First Choice</option>
-						<option value="A" selected>
-							Abstain
-						</option>
-					</Form.Control>
-				</Form.Group>
-				<hr />
-				<Form.Group controlId="vid" className="voter-info">
-					<Form.Label htmlFor="vid">Enter Voter ID</Form.Label>
-					<Form.Control id="vid" name="vid" type="email" />
-				</Form.Group>
+							<Form.Group controlId="c1">
+								<Form.Label htmlFor="c1">{this.candidate1}</Form.Label>
+								<img
+									src={CandidatePhoto1}
+									alt={this.candidate1}
+									className="candidate-img"
+								/>
+								<Form.Control as="select" id="c1" name="c1">
+									<option value="1">First Choice</option>
+									<option value="2">Second Choice</option>
+									<option value="3">Third Choice</option>
+									<option value="4">Fourth Choice</option>
+									<option value="5">Fifth Choice</option>
+									<option value="A" selected>
+										Abstain
+									</option>
+								</Form.Control>
+							</Form.Group>
+							<hr/>
+							<Form.Group controlId="vid" className="voter-info">
+								<Form.Label htmlFor="vid">Enter Voter ID</Form.Label>
+								<Form.Control id="vid" name="vid" type="email"/>
+							</Form.Group>
 
-				<Form.Group controlId="pwh" className="voter-info">
-					<Form.Label htmlFor="pwh">Enter Password</Form.Label>
-					<Form.Control id="pwh" name="pwh" type="password" />
-				</Form.Group>
+							<Form.Group controlId="pwh" className="voter-info">
+								<Form.Label htmlFor="pwh">Enter Password</Form.Label>
+								<Form.Control id="pwh" name="pwh" type="password"/>
+							</Form.Group>
 
-				<Button className="vote-btn" type="submit">
-					Vote!
-				</Button>
-				{this.state.error != null && <Failure title = "Oh no!" message = {this.state.error} />}
-				{this.state.submitted != null && <Success title = "Yay!" message = {this.state.submitted}/>}
-			</Form>
+							<Button className="vote-btn" type="submit">
+								Vote!
+							</Button>
+							{this.state.error != null && <Failure title="Oh no!" message={this.state.error}/>}
+							{this.state.submitted != null && <Success title="Yay!" message={this.state.submitted}/>}
+						</Form>
+						)
+					}
+				</Confirm>
+			</div>
 		);
 	}
 }
