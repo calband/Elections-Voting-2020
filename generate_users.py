@@ -8,7 +8,7 @@ admin_password = os.environ["CAL_BAND_VOTING_PASS"]
 
 registration_url = "https://soqgbubrta.execute-api.us-west-1.amazonaws.com/prod/register/"
 election_url = 'http://democracy.calband.org/'
-voter_list_file = "test_voters.csv"
+voter_list_file = "voters.csv"
 email_file = "voterEmail.html"
 
 
@@ -16,6 +16,9 @@ def main():
     emails = gather_emails(voter_list_file)
     for email in emails:
         username, password = grab_voting_info(email)
+        if not username:
+            print(f"{email} skipped")
+            continue
         html = generate_html(username, password)
         send_email(username, html)
         print(f"Succesfully created voter registration for {email}!")
@@ -40,7 +43,8 @@ def grab_voting_info(email):
     }
 
     resp = requests.post(registration_url, json.dumps(payload), headers=headers)
-    assert resp.ok
+    if not resp.ok:
+        return None, None
     body = resp.json()
     return body["username"], body["password"]
 

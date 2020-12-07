@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import json
 import boto3
 import traceback
+import hashlib
 
 ddb = boto3.resource("dynamodb")
 
@@ -118,6 +119,16 @@ def lambda_handler(event, context):
 
 def main(event, context):
     query = event["queryStringParameters"]
+    headers = event["headers"]
+
+    if "tabulation-key" not in headers:
+        return create_response(403, "Forbidden")
+
+    # lol this is such bad practice never do this pls
+    # always obfuscate away your keys to environment variables kids
+    if create_hash(headers["tabulation-key"]) != 'e47829abf456bfdc0aa05f0bdf73ec05cd95':
+        # if body['secretKey'] != "lol this is a temp pw don't get used to it":
+        return create_response(403, "Forbidden")
 
     # Verify that request is valid
     if not verify_request(query):
@@ -158,6 +169,11 @@ def verify_request(body):
         return False
 
     return True
+
+
+def create_hash(*args):
+    arg_string = "".join([str(arg) for arg in args])
+    return hashlib.sha256(arg_string.encode()).hexdigest()[:36]
 
 
 def create_response(status_code, message, body=None):
