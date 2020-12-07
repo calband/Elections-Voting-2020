@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Disclaimer from './Disclaimer';
+import Disclaimer from './disclaimer';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

@@ -1,23 +1,27 @@
 import React from 'react';
 
-import Disclaimer from './Disclaimer';
+import Disclaimer from './disclaimer';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import {Success, Failure} from "./alerts";
 
-import Placeholder from '../img/placeholder.png';
+import CandidatePhoto1 from '../img/vocaloid_calanfurd.png';
+import CandidatePhoto2 from '../img/cute_calanfurd.png';
+import CandidatePhoto3 from '../img/ponyo_calanfurd.png';
+import CandidatePhoto4 from '../img/haikyuu_calanfurd.png';
+import CandidatePhoto5 from '../img/simple_calanfurd.png';
 
 class TestBallot extends React.Component {
-	electionType = 'Test Candidates';
+	electionType = 'Cutest Couple';
 	voteType = 'test';
 
-	candidate1 = 'Candidate 1';
-	candidate2 = 'Candidate 2';
-	candidate3 = 'Candidate 3';
-	candidate4 = 'Candidate 4';
-	candidate5 = 'Candidate 5';
+	candidate1 = 'Vocaloid uwu';
+	candidate2 = 'Cute and Simple 🥺';
+	candidate3 = 'PONYO';
+	candidate4 = 'Haikyuu!! (hq comm represent btw)';
+	candidate5 = 'An Artist\'s Masterpiece';
 
 	constructor(props) {
 		super(props);
@@ -89,7 +93,7 @@ class TestBallot extends React.Component {
 				<Form.Group controlId="c1">
 					<Form.Label htmlFor="c1">{this.candidate1}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto1}
 						alt={this.candidate1}
 						className="candidate-img"
 					/>
@@ -104,10 +108,11 @@ class TestBallot extends React.Component {
 						</option>
 					</Form.Control>
 				</Form.Group>
+
 				<Form.Group controlId="c2">
 					<Form.Label htmlFor="c2">{this.candidate2}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto2}
 						alt={this.candidate2}
 						className="candidate-img"
 					/>
@@ -126,7 +131,7 @@ class TestBallot extends React.Component {
 				<Form.Group controlId="c3">
 					<Form.Label htmlFor="c3">{this.candidate3}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto3}
 						alt={this.candidate3}
 						className="candidate-img"
 					/>
@@ -145,7 +150,7 @@ class TestBallot extends React.Component {
 				<Form.Group controlId="c4">
 					<Form.Label htmlFor="c4">{this.candidate4}</Form.Label>
 					<img
-						src={Placeholder}
+						src={CandidatePhoto4}
 						alt={this.candidate4}
 						className="candidate-img"
 					/>
@@ -164,8 +169,8 @@ class TestBallot extends React.Component {
 				<Form.Group controlId="c5">
 					<Form.Label htmlFor="c5">{this.candidate5}</Form.Label>
 					<img
-						src={Placeholder}
-						alt={this.candidate2}
+						src={CandidatePhoto5}
+						alt={this.candidate5}
 						className="candidate-img"
 					/>
 					<Form.Control as="select" id="c5" name="c5">

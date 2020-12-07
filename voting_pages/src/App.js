@@ -1,4 +1,5 @@
 // https://tinyurl.com/ExCommElections2020
+// http://democracy.calband.org
 
 import React from 'react';
 import {
@@ -19,6 +20,7 @@ import StudBallot from './components/stud';
 import DmBallot from './components/dm';
 import ExecSecBallot from './components/execSec';
 import TestBallot from './components/test';
+import NotFound from './components/notFound';
 import Footer from './components/footer';
 
 import './App.scss';
@@ -77,6 +79,7 @@ function App() {
 							<Route exact path="/stud" component={StudBallot} />
 							<Route exact path="/execSec" component={ExecSecBallot} />
 							<Route exact path="/test" component={TestBallot} />
+							<Route exact path="*" component={NotFound} />
 						</Switch>
 					</Col>
 				</Row>
