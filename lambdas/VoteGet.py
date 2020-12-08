@@ -92,7 +92,7 @@ class RankedElection:
         self.rounds.append(tally)
 
         if winning_margin <= self.required_margin:
-            if self.tally and self.tally[-1] == tally:
+            if len(self.rounds) > 1 and self.rounds[-1] == tally:
                 1/0
             eliminated_candidate = min(tally.keys(), key=lambda x: tally[x])
             self.eliminate(eliminated_candidate)

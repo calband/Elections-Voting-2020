@@ -1,5 +1,5 @@
-// https://tinyurl.com/ExCommElections2020
-// http://democracy.calband.org
+// https://tinyurl.com/ExCommElections2020/
+// http://democracy.calband.org/
 
 import React from 'react';
 import {BrowserRouter as Router, NavLink, Route, Switch,} from 'react-router-dom';
@@ -7,6 +7,8 @@ import {BrowserRouter as Router, NavLink, Route, Switch,} from 'react-router-dom
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+
+import CalBandLogo from "./img/calband.png";
 
 import Main from './components/main';
 import ChangePw from './components/changePw';
@@ -26,11 +28,20 @@ function App() {
             <Router>
                 <Row>
                     <Col xs={4} className="left-col">
+                        <a href="/">
+                            <img
+                                src={CalBandLogo}
+                                alt="CAL BAND GR8"
+                                height="auto"
+                                width="30%"
+                            />
+                        </a>
+                        <br/>
                         <nav>
                             <ul className="nav">
                                 <li>
-                                    <NavLink exact to="/" activeClassName="selected">
-                                        Home
+                                    <NavLink exact to="/test" activeClassName="selected">
+                                        Test Ballot
                                     </NavLink>
                                 </li>
                                 <li>
@@ -51,11 +62,6 @@ function App() {
                                 <li>
                                     <NavLink exact to="/execSec" activeClassName="selected">
                                         Executive Secretary Ballot
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink exact to="/test" activeClassName="selected">
-                                        Test Ballot
                                     </NavLink>
                                 </li>
                                 <li>
