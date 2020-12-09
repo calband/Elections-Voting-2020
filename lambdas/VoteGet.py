@@ -89,18 +89,22 @@ class RankedElection:
         potential_winner = max(tally.keys(), key=lambda x: tally[x])
         winning_margin = tally[potential_winner] / self.total
 
-        self.rounds.append(tally)
-
-        if winning_margin <= self.required_margin:
-            if len(self.rounds) > 1 and self.rounds[-1] == tally:
+        if winning_margin <= self.required_margin and len(tally) > 2:
+            if len(self.rounds) > 0 and self.rounds[-1] == tally:
                 1/0
             eliminated_candidate = min(tally.keys(), key=lambda x: tally[x])
+            if eliminated_candidate == "NO WINNER":
+                no_win_candidates = list(tally.keys()).copy()
+                no_win_candidates.remove("NO WINNER")
+                eliminated_candidate = min(no_win_candidates, key=lambda x: tally[x])
             self.eliminate(eliminated_candidate)
-            return self.tabulate()
+            self.rounds.append(tally)
+            return self.__tabulate__()
         else:
             self.margin = tally[potential_winner]
             self.winner = potential_winner
             self.time = str(datetime.utcnow() - timedelta(hours=8))
+            self.rounds.append(tally)
             return potential_winner
 
     def eliminate(self, candidate):
@@ -115,8 +119,8 @@ def lambda_handler(event, context):
         print("-----ERROR. TRACEBACK:-----")
         traceback.print_exc()
         print("-------END TRACEBACK-------")
-        # return create_response(500, traceback.format_exc())
-        return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The gowden beaws at comp comm are working VEWY HAWD to fix this! Owo")
+        return create_response(500, traceback.format_exc())
+        # return create_response(500, "OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The gowden beaws at comp comm are working VEWY HAWD to fix this! Owo")
 
 
 def main(event, context):

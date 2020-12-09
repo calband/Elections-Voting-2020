@@ -1,5 +1,5 @@
 # Elections Voting 2020
-_____ Frontend Stack with a full serverless AWS backend stack. This voting system was built during the Fall 2020 ExComm 
+React frontend stack with a full serverless AWS backend stack. This voting system was built during the Fall 2020 ExComm 
 elections. Because voting in person is a major health hazard due to the pandemic occurring at the time, an online voting
 system was necessary in order to facilitate a free and fair democratic election in an online setting. This repo 
 represents an attempt to facilitate that election. If you see any bugs, feel free to create a new GitHub issue!
@@ -8,6 +8,9 @@ The future goal of this repo is to be merged into Members Only in case PR Comm w
 ballot system to a pure electronic system after the pandemic. Usage of this repo past the Fall 2020 ExComm elections
 is up to the discretion of future ExComm.
 
+## Frontend Stack
+The frontend stack was first written by 🅱️ames 🅱️arquez (Bass Drum '17, jamesamarquez@berkeley.edu) in pure HTML, CSS, 
+and JS. The original HTML and CSS was then modified by brvin 
 
 ## Backend Stack
 The backend stack was written by 🅱️rvin 🅱️accay (Glock '19, ebaccay@berkeley.edu) using the AWS Serverless Model. All code  in the `lambdas` 
@@ -59,10 +62,10 @@ _the vote will be discarded_.
 
 ## Tallying
 Send a `GET` request to `https://soqgbubrta.execute-api.us-west-1.amazonaws.com/prod/vote/` with the a query string
-paramter `voteType` with the value `dm`, `execSec`, `prd` or `stud` in order to tabulate the vote for the position 
+parameter `voteType` with the value `dm`, `execSec`, `prd`, `stud`, or `test` in order to tabulate the vote for the position 
 specified by `voteType`.
 
 ### Built with 💙 by Democracy Comm
-Last updated: 12/2/2020
+Last updated: 12/8/2020
 
 © calband, brv, jamz, fun, and DEMOCRACY #democracy 😤

@@ -1,6 +1,6 @@
 # Removing email list from members only
-voters.csv
-test_voters.csv
+emails/voters.csv
+emails/test_voters.csv
 
 # Remoiving build files
 voting_pages.zip

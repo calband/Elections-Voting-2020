@@ -28,17 +28,19 @@ function App() {
             <Router>
                 <Row>
                     <Col xs={4} className="left-col">
-                        <a href="/">
-                            <img
-                                src={CalBandLogo}
-                                alt="CAL BAND GR8"
-                                height="auto"
-                                width="30%"
-                            />
-                        </a>
-                        <br/>
                         <nav>
                             <ul className="nav">
+                                <li>
+                                    <NavLink exact to="/">
+                                        <img
+                                            src={CalBandLogo}
+                                            alt="CAL BAND GR8"
+                                            height="auto"
+                                            width="30%"
+                                        />
+                                    </NavLink>
+                                    <br/>
+                                </li>
                                 <li>
                                     <NavLink exact to="/test" activeClassName="selected">
                                         Test Ballot
