@@ -2,7 +2,7 @@
 // http://democracy.calband.org/
 
 import React from 'react';
-import {BrowserRouter as Router, NavLink, Route, Switch,} from 'react-router-dom';
+import {BrowserRouter as Router, NavLink, Route, Routes,} from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -75,16 +75,16 @@ function App() {
                         </nav>
                     </Col>
                     <Col xs={8} className="right-col">
-                        <Switch>
-                            <Route exact path="/" component={Main}/>
-                            <Route exact path="/change_password" component={ChangePw}/>
-                            <Route exact path="/prd" component={PrdBallot}/>
-                            <Route exact path="/dm" component={DmBallot}/>
-                            <Route exact path="/stud" component={StudBallot}/>
-                            <Route exact path="/execSec" component={ExecSecBallot}/>
-                            <Route exact path="/test" component={TestBallot}/>
-                            <Route exact path="*" component={NotFound}/>
-                        </Switch>
+                        <Routes>
+                            <Route exact path="/" element={<Main />}/>
+                            <Route exact path="/change_password" element={<ChangePw />}/>
+                            <Route exact path="/prd" element={<PrdBallot />}/>
+                            <Route exact path="/dm" element={<DmBallot />}/>
+                            <Route exact path="/stud" element={<StudBallot />}/>
+                            <Route exact path="/execSec" element={<ExecSecBallot />}/>
+                            <Route exact path="/test" element={<TestBallot />}/>
+                            <Route exact path="*" element={<NotFound />}/>
+                        </Routes>
                     </Col>
                 </Row>
             </Router>
